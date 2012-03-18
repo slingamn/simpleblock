@@ -1,8 +1,16 @@
+// get the full list of filters
+if (ignoreDefaultFilters) {
+	allFilters = customFilters;
+} else {
+	allFilters = defaultFilters.concat(customFilters);
+}
+
 // magic objects that the webRequest API interprets:
 blockImagePayload = { redirectUrl: chrome.extension.getURL("blank.gif") };
 blockPagePayload = { redirectUrl: chrome.extension.getURL("blank.html") };
 cancelPayload = { cancel: true };
 
+// magic callbacks to deliver the abovementioned magic objects:
 function blockImage(details) {
 	return blockImagePayload;
 }
@@ -15,20 +23,22 @@ function cancelObject(details) {
 	return cancelPayload;
 }
 
+// types of object and callbacks to remove them:
 listenerCallbacks = [
 	[["image"], blockImage],
 	[["sub_frame"], blockPage],
 	[["object", "script"], cancelObject]
 ]
 
+// register all callbacks
 function enable() {
 	for (var j in listenerCallbacks) {
 		var types = listenerCallbacks[j][0];
 		var callback = listenerCallbacks[j][1];
-		for (var i in domainFilters) {
+		for (var i in allFilters) {
 			chrome.webRequest.onBeforeRequest.addListener(
 				callback,
-				{urls: [domainFilters[i]], "types": types},
+				{urls: [allFilters[i]], "types": types},
 				// blocks the request until processed; needed to cancel/redir
 				["blocking"]
 			);
@@ -36,6 +46,7 @@ function enable() {
 	}
 }
 
+// unregister all callbacks
 function disable() {
 	// removeListener is broken, i think this fix hasn't been released yet:
 	// http://code.google.com/p/chromium/issues/detail?id=107368
@@ -45,6 +56,7 @@ function disable() {
 	}
 }
 
+// toggle blocking on-off via the extension icon in the Omnibar
 blockingEnabled = true;
 function toggleEnabled() {
 	if (blockingEnabled) {
@@ -61,4 +73,5 @@ function toggleEnabled() {
 }
 chrome.browserAction.onClicked.addListener(toggleEnabled);
 
+// main screen turn on
 enable();

@@ -1,4 +1,4 @@
-domainFilters = [
+defaultFilters = [
 	"*://*.doubleclick.net/*",
 	"*://*.expo9.exponential.com/*",
 	"*://*.scorecardresearch.com/*",
