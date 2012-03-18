@@ -1,0 +1,10 @@
+{
+  "name": "SimpleBlock",
+  "version": "1.0",
+  "description": "Simple interface for blocking content via the webRequest API.",
+  "browser_action": {
+    "default_icon": "blocking_enabled.png"
+  },
+  "background_page": "background.html",
+  "permissions": ["http://*/*", "https://*/*", "webRequest", "webRequestBlocking"]
+}
