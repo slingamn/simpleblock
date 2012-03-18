@@ -23,4 +23,4 @@ If you're like me and don't really understand how Chrome extensions work, here's
 TODO
 ----
 
-* Disable doesn't disable all the filters (might be <http://code.google.com/p/chromium/issues/detail?id=107368>)
+* Disable doesn't disable all the filters (at least in the Chrome stable release), due to <http://code.google.com/p/chromium/issues/detail?id=107368>
