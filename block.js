@@ -27,7 +27,7 @@ function cancelObject(details) {
 listenerCallbacks = [
 	[["image"], blockImage],
 	[["sub_frame"], blockPage],
-	[["object", "script"], cancelObject]
+	[["object", "script", "xmlhttprequest"], cancelObject]
 ]
 
 // register all callbacks
