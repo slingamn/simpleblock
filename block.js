@@ -5,10 +5,11 @@ if (ignoreDefaultFilters) {
 	allFilters = defaultFilters.concat(customFilters);
 }
 
-// magic objects that the webRequest API interprets:
-blockImagePayload = { redirectUrl: chrome.extension.getURL("blank.gif") };
-blockPagePayload = { redirectUrl: chrome.extension.getURL("blank.html") };
-cancelPayload = { cancel: true };
+// magic objects that the webRequest API interprets
+// we turn images and iframes into innocuous no-ops, everything else gets outright "cancelled"
+blockImagePayload = {redirectUrl: chrome.extension.getURL("blank.gif")};
+blockPagePayload = {redirectUrl: chrome.extension.getURL("blank.html")};
+cancelPayload = {cancel: true};
 
 // magic callbacks to deliver the abovementioned magic objects:
 function blockImage(details) {
@@ -19,7 +20,7 @@ function blockPage(details) {
 	return blockPagePayload;
 }
 
-function cancelObject(details) {
+function blockObject(details) {
 	return cancelPayload;
 }
 
@@ -27,7 +28,7 @@ function cancelObject(details) {
 listenerCallbacks = [
 	[["image"], blockImage],
 	[["sub_frame"], blockPage],
-	[["object", "script", "xmlhttprequest"], cancelObject]
+	[["object", "script", "xmlhttprequest"], blockObject]
 ]
 
 // register all callbacks
@@ -38,7 +39,7 @@ function enable() {
 		for (var i in allFilters) {
 			chrome.webRequest.onBeforeRequest.addListener(
 				callback,
-				{urls: [allFilters[i]], "types": types},
+				{urls: [allFilters[i]], types: types},
 				// blocks the request until processed; needed to cancel/redir
 				["blocking"]
 			);
@@ -62,13 +63,11 @@ function toggleEnabled() {
 	if (blockingEnabled) {
 		disable();
 		blockingEnabled = false;
-		chrome.browserAction.setIcon({"path": "blocking_disabled.png"});
-		console.log("Blocking disabled.");
+		chrome.browserAction.setIcon({path: "disabled.png"});
 	} else {
 		enable();
 		blockingEnabled = true;
-		chrome.browserAction.setIcon({"path": "blocking_enabled.png"});
-		console.log("Blocking enabled.");
+		chrome.browserAction.setIcon({path: "enabled.png"});
 	}
 }
 chrome.browserAction.onClicked.addListener(toggleEnabled);
