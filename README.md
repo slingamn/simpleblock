@@ -31,3 +31,12 @@ TODO
 
 * Disable doesn't disable all the filters (at least in the Chrome stable release), due to <http://code.google.com/p/chromium/issues/detail?id=107368>. This also means that clicking "apply changes" isn't sufficient to remove a filter; you'll have to restart the browser.
 * The options page needs better CSS (and more UX attention in general)
+* It should be possible to dump the filters to JSON, and to merge custom filters with an updated set of default filters
+
+Ethics
+------
+Writing this extension led to an interesting conversation about the ethics of blocking ads. My own attitude is that blocking ads is justified by a sort of [Castle Doctrine](http://en.wikipedia.org/wiki/Castle_doctrine) for computing. If you own the hardware, it works for you and it should do what you want. Another way to look at it is that once someone has sent you bits over the network, they have no say in how you choose to process or display them.
+
+There are some interesting cases where we attempt to voluntarily surrender this freedom. In particular, [PunkBuster](http://en.wikipedia.org/wiki/PunkBuster) prevents you from modifying your multiplayer games, and people do this in exchange for being able to play in an environment without cheating. Furthermore, the future of the PC as a gaming platform may hinge on our willingness to accept DRM technologies like [Steam](http://en.wikipedia.org/wiki/Steam_(software\)) and [SecuROM](http://en.wikipedia.org/wiki/SecuROM).
+
+The best counterargument against my reasoning that I've heard is that blocking ads breaks a social contract between you and the content provider. The best counter-counterargument I can muster is that in general, social contracts (beyond the most basic rules of civil society) do not hold in the marketplace. I'm interested in talking more about this.
