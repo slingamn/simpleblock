@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SimpleBlock - Options</title>
+		<script src="options.js"></script>
+	</head>
+	<body onload="populate();">
+		<p>
+		<select id="filterSelector" size=20></select>
+		<br/>
+		<button onClick="removeOrEdit();">Remove/edit selected filter</button>
+		</p>
+
+		<p>
+		<input type="text" id="newFilter"/ >
+		<button onClick="addNew();">Add to filters</button>
+		</p>
+
+		<p>
+		<button onClick="applyChanges();">Save and apply changes</button>
+		</p>
+
+		<p>
+		<button onClick="restoreDefaults();">Restore defaults</button>
+		<button onClick="chrome.extension.getBackgroundPage().disable();">Disable blocking</button>
+		<button onClick="chrome.extension.getBackgroundPage().enable();">Enable blocking</button>
+		</p>
+	</body>
+
+</html>

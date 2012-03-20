@@ -1,14 +1,21 @@
-// get the full list of filters
-if (ignoreDefaultFilters) {
-	allFilters = customFilters;
-} else {
-	allFilters = defaultFilters.concat(customFilters);
+/**
+ * All the actual functionality of the extension; loads as part of the background page.
+ *
+ * Active ingredient is enable(), which sets up the webRequest callbacks.
+ *
+ * */
+
+allFilters = null;
+
+function setFilters(newFilters) {
+	allFilters = newFilters;
+	localStorage["filters"] = JSON.stringify(newFilters);
 }
 
 // magic objects that the webRequest API interprets
 // we turn images and iframes into innocuous no-ops, everything else gets outright "cancelled"
 blockImagePayload = {redirectUrl: chrome.extension.getURL("blank.gif")};
-blockPagePayload = {redirectUrl: chrome.extension.getURL("blank.html")};
+blockPagePayload = {redirectUrl: "about:blank"};
 cancelPayload = {cancel: true};
 
 // magic callbacks to deliver the abovementioned magic objects:
@@ -31,8 +38,15 @@ listenerCallbacks = [
 	[["object", "script", "xmlhttprequest"], blockObject]
 ]
 
+// global on/off state
+blockingEnabled = false;
+
 // register all callbacks
 function enable() {
+	if (blockingEnabled) {
+		return;
+	}
+
 	for (var j in listenerCallbacks) {
 		var types = listenerCallbacks[j][0];
 		var callback = listenerCallbacks[j][1];
@@ -45,6 +59,9 @@ function enable() {
 			);
 		}
 	}
+
+	blockingEnabled = true;
+	chrome.browserAction.setIcon({path: "enabled.png"});
 }
 
 // unregister all callbacks
@@ -55,21 +72,36 @@ function disable() {
 		var callback = listenerCallbacks[j][1];
 		chrome.webRequest.onBeforeRequest.removeListener(callback);
 	}
+
+	blockingEnabled = false;
+	chrome.browserAction.setIcon({path: "disabled.png"});
 }
 
-// toggle blocking on-off via the extension icon in the Omnibar
-blockingEnabled = true;
+// power-cycle
+function refreshFilters() {
+	disable();
+	enable();
+}
+
+// switch-flip
 function toggleEnabled() {
 	if (blockingEnabled) {
 		disable();
-		blockingEnabled = false;
-		chrome.browserAction.setIcon({path: "disabled.png"});
 	} else {
 		enable();
-		blockingEnabled = true;
-		chrome.browserAction.setIcon({path: "enabled.png"});
 	}
 }
+
+// Initialization.
+
+if (localStorage["filters"] == undefined) {
+	console.log("Initializing filters to defaults.");
+	setFilters(defaultFilters);
+} else {
+	allFilters = JSON.parse(localStorage["filters"]);
+}
+
+// toggle blocking on-off via the extension icon in the Omnibar
 chrome.browserAction.onClicked.addListener(toggleEnabled);
 
 // main screen turn on
