@@ -1,13 +1,13 @@
 SimpleBlock
 ===========
 
-SimpleBlock is an ad-blocking extension for Chrome (or Chromium); the main goals are simplicity of implementation and performance. It can also be thought of as the "missing frontend" to Chrome's webRequest API.
+SimpleBlock is an ad-blocking extension for Chrome (or Chromium); the main goals are simplicity of implementation and performance. It can also be thought of as the "missing frontend" to Chrome's [webRequest API](http://code.google.com/chrome/extensions/trunk/webRequest.html).
 
 My thought process was something like this:
 
 1. The last time I blocked ads, it made things slow. I'd like to block ads at native speed.
 1. Google "chrome block ads native", get [this ticket](http://code.google.com/p/chromium/issues/detail?id=41336).
-1. Follow the breadcrumbs to the [webRequest API](http://code.google.com/chrome/extensions/trunk/webRequest.html).
+1. Follow the breadcrumbs to the webRequest API.
 1. What's the least amount of code necessary to expose the URL-blocking functionality of webRequest?
 
 The icons are released by [Axialis Team](http://www.axialis.com/free/icons/) under the Creative Commons license. My own code is released under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0.html).

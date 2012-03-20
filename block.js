@@ -35,7 +35,7 @@ function blockObject(details) {
 listenerCallbacks = [
 	[["image"], blockImage],
 	[["sub_frame"], blockPage],
-	[["object", "script", "xmlhttprequest"], blockObject]
+	[["object", "script", "xmlhttprequest", "stylesheet", "other"], blockObject]
 ]
 
 // global on/off state
