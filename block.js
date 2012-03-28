@@ -66,8 +66,6 @@ function enable() {
 
 // unregister all callbacks
 function disable() {
-	// removeListener is broken in the stable channel:
-	// http://code.google.com/p/chromium/issues/detail?id=107368
 	for (var j in listenerCallbacks) {
 		var callback = listenerCallbacks[j][1];
 		chrome.webRequest.onBeforeRequest.removeListener(callback);

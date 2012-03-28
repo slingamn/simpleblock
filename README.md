@@ -14,9 +14,7 @@ The icons are released by [Axialis Team](http://www.axialis.com/free/icons/) und
 
 Instructions
 ------------
-Warning: the code isn't stable and is currently significantly affected by a Chrome bug (see below.)
-
-To install, clone the repository locally, open `chrome://extensions/`, check the "Developer mode" box, and use "load unpacked extension" on the directory containing your clone. A better installation mechanism may be available once the extension is stable.
+To install, clone the repository locally, open `chrome://extensions/`, check the "Developer mode" box, and use "load unpacked extension" on the directory containing your clone. A better installation mechanism may be available once the extension is more stable.
 
 Once installed, an icon should appear next to your Omnibox. Red means blocking is enabled, blue means disabled; click the icon to toggle. Right-click and go to "options" to customize the domain filters it uses. The filter format is Chrome's [URL pattern](http://code.google.com/chrome/extensions/match_patterns.html).
 
@@ -29,7 +27,6 @@ If you're like me and don't really understand how Chrome extensions work, here's
 TODO
 ----
 
-* Disable doesn't disable all the filters (at least in the Chrome stable release), due to <http://code.google.com/p/chromium/issues/detail?id=107368>. This also means that clicking "apply changes" isn't sufficient to remove a filter; you'll have to restart the browser.
 * The options page needs better CSS (and more UX attention in general)
 * It should be possible to dump the filters to JSON, and to merge custom filters with an updated set of default filters
 
