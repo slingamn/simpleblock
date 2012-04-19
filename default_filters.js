@@ -1,8 +1,13 @@
 defaultFilters = [
-	"*://*.doubleclick.net/*",
-	"*://*.expo9.exponential.com/*",
+	// personally, I can't stand the like box
+	//"http://www.facebook.com/plugins/likebox.php?*",
+	"http://*.doubleclick.net/*",
 	"*://*.googleadservices.com/*",
 	"*://*.googlesyndication.com/*",
-	"*://*.scorecardresearch.com/*",
-	"*://creative.ak.fbcdn.net/*"
+	"*://creative.ak.fbcdn.net/*",
+	"http://*.adbrite.com/*",
+	"http://*.expo9.exponential.com/*",
+	"http://*.quantserve.com/*",
+	"http://*.scorecardresearch.com/*",
+	"http://*.zedo.com/*",
 ]
