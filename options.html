@@ -4,26 +4,26 @@
 		<title>SimpleBlock - Options</title>
 		<script src="options.js"></script>
 	</head>
-	<body onload="populate();">
+	<body>
 		<p>
 		<select id="filterSelector" size=20></select>
 		<br/>
-		<button onClick="removeOrEdit();">Remove/edit selected filter</button>
+		<button id="roeButton">Remove/edit selected filter</button>
 		</p>
 
 		<p>
 		<input type="text" id="newFilter"/ >
-		<button onClick="addNew();">Add to filters</button>
+		<button id="addNewButton">Add to filters</button>
 		</p>
 
 		<p>
-		<button onClick="applyChanges();">Save and apply changes</button>
+		<button id="applyChangesButton">Save and apply changes</button>
 		</p>
 
 		<p>
-		<button onClick="restoreDefaults();">Restore defaults</button>
-		<button onClick="chrome.extension.getBackgroundPage().disable();">Disable blocking</button>
-		<button onClick="chrome.extension.getBackgroundPage().enable();">Enable blocking</button>
+		<button id="restoreDefaultsButton">Restore defaults</button>
+		<button id="disableButton">Disable blocking</button>
+		<button id="enableButton">Enable blocking</button>
 		</p>
 	</body>
 

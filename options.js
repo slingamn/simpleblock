@@ -73,3 +73,21 @@ function restoreDefaults() {
 	bgPage.setFilters(bgPage.defaultFilters);
 	populate();
 }
+
+function init() {
+	populate();
+
+	document.getElementById("addNewButton").addEventListener('click', addNew);
+	document.getElementById("applyChangesButton").addEventListener('click', applyChanges);
+	document.getElementById("restoreDefaultsButton").addEventListener('click', restoreDefaults);
+	document.getElementById("roeButton").addEventListener('click', removeOrEdit);
+
+	document.getElementById("enableButton").addEventListener('click', function() {
+		chrome.extension.getBackgroundPage().enable();
+	})
+	document.getElementById("disableButton").addEventListener('click', function() {
+		chrome.extension.getBackgroundPage().disable();
+	})
+}
+
+document.addEventListener('DOMContentLoaded', init);
