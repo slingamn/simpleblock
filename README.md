@@ -22,7 +22,7 @@ Details
 -------
 This extension can only block external requests (images, Flash, XHR) via the aforementioned URL patterns. It won't remove ad content that is part of the actual text of the HTML page. For a more fully-featured ad blocker, try [adblockforchrome](http://code.google.com/p/adblockforchrome/).
 
-If you're like me and don't really understand how Chrome extensions work, here's the directed graph of this extension. `manifest.json` gives the extension an icon and a "background page", a place to keep the global extension state. `background.html` is a trivial background page that loads global Javascript, in particular `block.js`. `block.js` sets up webRequest hooks that trigger on requests to the filtered URLs; this causes those URLs to be blocked across all pages. `block.js` also defines the handlers for the various UI controls. In particular, the options page can call Javascript functions on the background page, via `chrome.extension.getBackgroundPage()`.
+If you're like me and don't really understand how Chrome extensions work, here's the directed graph of this extension. `manifest.json` gives the extension an icon and a set of scripts. Chrome automatically attaches those scripts to a "generated background page" in which they execute; this is what contains the global extension state. (It's also possible to explicitly define a background page.) The active ingredient among these scripts is `block.js`. It sets up webRequest hooks that trigger on requests to the filtered URLs, causing those URLs to be blocked across all pages. `block.js` also defines the handlers for the various UI controls. In particular, the options page can call Javascript functions on the background page, via `chrome.extension.getBackgroundPage()`.
 
 TODO
 ----
