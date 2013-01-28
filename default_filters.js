@@ -4,6 +4,7 @@ defaultFilters = [
 	"http://*.doubleclick.net/*",
 	"*://*.googleadservices.com/*",
 	"*://*.googlesyndication.com/*",
+	"*://*.google-analytics.com/*",
 	"*://creative.ak.fbcdn.net/*",
 	"http://*.adbrite.com/*",
 	"http://*.expo9.exponential.com/*",
