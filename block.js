@@ -50,14 +50,12 @@ function enable() {
 	for (var j in listenerCallbacks) {
 		var types = listenerCallbacks[j][0];
 		var callback = listenerCallbacks[j][1];
-		for (var i in allFilters) {
-			chrome.webRequest.onBeforeRequest.addListener(
-				callback,
-				{urls: [allFilters[i]], types: types},
-				// blocks the request until processed; needed to cancel/redir
-				["blocking"]
-			);
-		}
+		chrome.webRequest.onBeforeRequest.addListener(
+			callback,
+			{urls: allFilters, types: types},
+			// blocks the request until processed; needed to cancel/redir
+			["blocking"]
+		);
 	}
 
 	blockingEnabled = true;
