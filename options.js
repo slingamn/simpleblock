@@ -7,7 +7,7 @@
 function populate() {
 	var selector = document.getElementById("filterSelector");
 	while (selector.options.length > 0) {
-		selector.remove();
+		selector.remove(0);
 	}
 
 	var allFilters = chrome.extension.getBackgroundPage().allFilters;
@@ -68,9 +68,39 @@ function removeOrEdit() {
 
 // put the filters from default_filters.js into the view
 function restoreDefaults() {
-	// TODO ask for confirmation
-	bgPage = chrome.extension.getBackgroundPage();
+	if (!confirm("This will erase your custom filters. Are you sure?")) {
+		return;
+	}
+	var bgPage = chrome.extension.getBackgroundPage();
 	bgPage.setFilters(bgPage.defaultFilters);
+	populate();
+}
+
+function exportFilters() {
+	var allFilters = chrome.extension.getBackgroundPage().allFilters;
+	document.getElementById("importExportFilters").value = JSON.stringify(allFilters);
+}
+
+function importFilters() {
+	var jsonFilters = document.getElementById("importExportFilters").value;
+	if (!jsonFilters) {
+		return;
+	}
+
+	try {
+		var filters = JSON.parse(jsonFilters);
+		var filtersLength = filters.length;
+	} catch (e) {
+		alert(e);
+		return;
+	}
+
+	if (!confirm("Your filters will be replaced by these " + filtersLength + " new filters. Are you sure?")) {
+		return;
+	}
+
+	var bgPage = chrome.extension.getBackgroundPage();
+	bgPage.setFilters(filters);
 	populate();
 }
 
@@ -81,6 +111,9 @@ function init() {
 	document.getElementById("applyChangesButton").addEventListener('click', applyChanges);
 	document.getElementById("restoreDefaultsButton").addEventListener('click', restoreDefaults);
 	document.getElementById("roeButton").addEventListener('click', removeOrEdit);
+
+	document.getElementById("exportButton").addEventListener('click', exportFilters);
+	document.getElementById("importButton").addEventListener('click', importFilters);
 
 	document.getElementById("enableButton").addEventListener('click', function() {
 		chrome.extension.getBackgroundPage().enable();

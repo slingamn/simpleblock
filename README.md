@@ -28,7 +28,7 @@ TODO
 ----
 
 * The options page needs better CSS (and more UX attention in general)
-* It should be possible to dump the filters to JSON, and to merge custom filters with an updated set of default filters
+* It should be possible to merge two sets of filters, e.g., custom filters and a new set of default filters
 
 Ethics
 ------
