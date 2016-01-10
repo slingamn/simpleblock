@@ -20,8 +20,6 @@ function populate() {
 }
 
 // save and activate changes made in the view
-// TODO do this automatically on every change?
-// TODO warn the user if they're leaving the page without saving
 function applyChanges() {
 	var allFilters = [];
 	var selector = document.getElementById("filterSelector");
@@ -36,7 +34,7 @@ function applyChanges() {
 	bgPage.refreshFilters();
 }
 
-// add a new filter to the view (without saving or activating)
+// add a new filter to the view
 function addNew() {
 	var editBox = document.getElementById("newFilter");
 	var newFilter = editBox.value;
@@ -50,9 +48,11 @@ function addNew() {
 	option.value = editBox.value;
 	selector.add(option, null);
 	editBox.value = null;
+
+	applyChanges();
 }
 
-// take a filter out of the view, put it in the textbox for editing
+// remove a filter, put it in the textbox for editing
 function removeOrEdit() {
 	var selector = document.getElementById("filterSelector");
 	var index = selector.selectedIndex;
@@ -64,6 +64,8 @@ function removeOrEdit() {
 	selector.remove(index);
 	var editBox = document.getElementById("newFilter");
 	editBox.value = removedOption.value;
+
+	applyChanges();
 }
 
 // put the filters from default_filters.js into the view
@@ -108,7 +110,6 @@ function init() {
 	populate();
 
 	document.getElementById("addNewButton").addEventListener('click', addNew);
-	document.getElementById("applyChangesButton").addEventListener('click', applyChanges);
 	document.getElementById("restoreDefaultsButton").addEventListener('click', restoreDefaults);
 	document.getElementById("roeButton").addEventListener('click', removeOrEdit);
 
