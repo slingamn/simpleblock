@@ -110,9 +110,10 @@ function importFilters() {
 function sortFilters() {
 	var bgPage = chrome.extension.getBackgroundPage();
 	var allFilters = bgPage.allFilters;
-	allFilters.sort()
+	allFilters.sort();
+	// persist back to localStorage:
 	bgPage.setFilters(allFilters);
-	populate()
+	populate();
 }
 
 
