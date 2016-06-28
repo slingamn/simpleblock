@@ -106,6 +106,16 @@ function importFilters() {
 	populate();
 }
 
+
+function sortFilters() {
+	var bgPage = chrome.extension.getBackgroundPage();
+	var allFilters = bgPage.allFilters;
+	allFilters.sort()
+	bgPage.setFilters(allFilters);
+	populate()
+}
+
+
 function init() {
 	populate();
 
@@ -122,6 +132,7 @@ function init() {
 	document.getElementById("disableButton").addEventListener('click', function() {
 		chrome.extension.getBackgroundPage().disable();
 	})
+	document.getElementById("sortButton").addEventListener('click', sortFilters);
 }
 
 document.addEventListener('DOMContentLoaded', init);
