@@ -42,7 +42,7 @@ listenerCallbacks = [
 blockingEnabled = false;
 
 // register all callbacks
-function enable() {
+function enable(icon = true) {
 	if (blockingEnabled) {
 		return;
 	}
@@ -63,24 +63,30 @@ function enable() {
 	}
 
 	blockingEnabled = true;
-	chrome.browserAction.setIcon({path: "enabled.png"});
+	if (icon) {
+		chrome.browserAction.setIcon({path: "enabled.png"});
+	}
 }
 
 // unregister all callbacks
-function disable() {
+function disable(icon = true) {
 	for (var j in listenerCallbacks) {
 		var callback = listenerCallbacks[j][1];
 		chrome.webRequest.onBeforeRequest.removeListener(callback);
 	}
 
 	blockingEnabled = false;
-	chrome.browserAction.setIcon({path: "disabled.png"});
+	if (icon) {
+		chrome.browserAction.setIcon({path: "disabled.png"});
+	}
 }
 
 // power-cycle
 function refreshFilters() {
-	disable();
-	enable();
+	// work around some weird Chrome issue. seems like: on first load,
+	// if you call setIcon twice in a row, the second call is ignored (?)
+	disable(false);
+	enable(true);
 }
 
 // switch-flip
