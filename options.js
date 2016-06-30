@@ -103,6 +103,7 @@ function importFilters() {
 
 	var bgPage = chrome.extension.getBackgroundPage();
 	bgPage.setFilters(filters);
+	bgPage.refreshFilters();
 	populate();
 }
 
