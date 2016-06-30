@@ -29,6 +29,7 @@ TODO
 
 * The options page needs better CSS (and more UX attention in general)
 * It should be possible to merge two sets of filters, e.g., custom filters and a new set of default filters
+* As of June 2016, WebSocket requests are not blocked, due to [Chromium issue #129353](https://bugs.chromium.org/p/chromium/issues/detail?id=129353).
 
 Ethics
 ------
