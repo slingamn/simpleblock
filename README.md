@@ -16,7 +16,7 @@ Instructions
 ------------
 To install, clone the repository locally, open `chrome://extensions/`, check the "Developer mode" box, and use "load unpacked extension" on the directory containing your clone. A better installation mechanism may be available once the extension is more stable.
 
-Once installed, an icon should appear next to your Omnibox. Red means blocking is enabled, blue means disabled; click the icon to toggle. Right-click and go to "options" to customize the domain filters it uses. (You have to click "Save and apply changes" for your changes to take effect.) The filter format is Chrome's [URL pattern](http://code.google.com/chrome/extensions/match_patterns.html).
+Once installed, an icon should appear next to your Omnibox. Red means blocking is enabled, blue means disabled; click the icon to toggle. Right-click and go to "options" to customize the URI filters it uses. The filter format is Chrome's [match pattern](https://developer.chrome.com/extensions/match_patterns).
 
 Details
 -------
