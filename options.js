@@ -75,6 +75,7 @@ function restoreDefaults() {
 	}
 	var bgPage = chrome.extension.getBackgroundPage();
 	bgPage.setFilters(bgPage.defaultFilters);
+	bgPage.refreshFilters();
 	populate();
 }
 
