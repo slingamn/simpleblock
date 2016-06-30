@@ -47,15 +47,19 @@ function enable() {
 		return;
 	}
 
-	for (var j in listenerCallbacks) {
-		var types = listenerCallbacks[j][0];
-		var callback = listenerCallbacks[j][1];
-		chrome.webRequest.onBeforeRequest.addListener(
-			callback,
-			{urls: allFilters, types: types},
-			// blocks the request until processed; needed to cancel/redir
-			["blocking"]
-		);
+	// edge case: enabling with urls == [] will block *all* URLs,
+	// rather than none of them
+	if (allFilters.length > 0) {
+		for (var j in listenerCallbacks) {
+			var types = listenerCallbacks[j][0];
+			var callback = listenerCallbacks[j][1];
+			chrome.webRequest.onBeforeRequest.addListener(
+				callback,
+				{urls: allFilters, types: types},
+				// blocks the request until processed; needed to cancel/redir
+				["blocking"]
+			);
+		}
 	}
 
 	blockingEnabled = true;
