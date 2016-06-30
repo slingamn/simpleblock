@@ -11,6 +11,5 @@
   },
   "options_page": "options.html",
   "permissions": ["http://*/*", "https://*/*", "webRequest", "webRequestBlocking"],
-  "incognito": "spanning",
-  "web_accessible_resources": ["blank.gif"]
+  "incognito": "spanning"
 }
