@@ -14,7 +14,7 @@ function setFilters(newFilters) {
 
 // magic objects that the webRequest API interprets
 // we turn images and iframes into innocuous no-ops, everything else gets outright "cancelled"
-blockImagePayload = {redirectUrl: "data:image/gif;,"};
+blockImagePayload = {redirectUrl: "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEAAAAALAAAAAABAAEAAAI="};
 blockPagePayload = {redirectUrl: "about:blank"};
 cancelPayload = {cancel: true};
 
