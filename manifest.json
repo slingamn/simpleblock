@@ -9,7 +9,14 @@
   "background": {
     "scripts": ["default_filters.js", "block.js"]
   },
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "icons": {
+     "16": "enabled.png",
+     "48": "enabled_48.png"
+  },
   "permissions": ["http://*/*", "https://*/*", "webRequest", "webRequestBlocking"],
   "incognito": "spanning"
 }
