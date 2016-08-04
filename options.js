@@ -70,8 +70,7 @@ function removeOrEdit() {
 
 // put the filters from default_filters.js into the view
 function restoreDefaults() {
-	// TODO clean this up after https://bugs.chromium.org/p/chromium/issues/detail?id=476350
-	if (!chrome.extension.getBackgroundPage().confirm("This will erase your custom filters. Are you sure?")) {
+	if (!confirm("This will erase your custom filters. Are you sure?")) {
 		return;
 	}
 	var bgPage = chrome.extension.getBackgroundPage();
@@ -99,7 +98,7 @@ function importFilters() {
 		return;
 	}
 
-	if (!chrome.extension.getBackgroundPage().confirm("Your filters will be replaced by these " + filtersLength + " new filters. Are you sure?")) {
+	if (!confirm("Your filters will be replaced by these " + filtersLength + " new filters. Are you sure?")) {
 		return;
 	}
 
