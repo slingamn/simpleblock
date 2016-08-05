@@ -107,6 +107,7 @@ storedFilters = chrome.storage.local.get("filters",
 			setFilters(defaultFilters);
 		} else {
 			setFilters(result["filters"]);
+			allFilters = result["filters"];
 		}
 
 		// toggle blocking on-off via the extension icon in the Omnibar
