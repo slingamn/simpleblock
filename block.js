@@ -64,7 +64,7 @@ function enable(icon = true) {
 
 	blockingEnabled = true;
 	if (icon) {
-		chrome.browserAction.setIcon(enabledImageData);
+		chrome.browserAction.setIcon({path: "enabled.png"});
 	}
 }
 
@@ -77,7 +77,7 @@ function disable(icon = true) {
 
 	blockingEnabled = false;
 	if (icon) {
-		chrome.browserAction.setIcon(disabledImageData);
+		chrome.browserAction.setIcon({path: "disabled.png"});
 	}
 }
 
