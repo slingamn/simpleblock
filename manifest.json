@@ -1,6 +1,6 @@
 {
   "name": "SimpleBlock",
-  "version": "0.3",
+  "version": "0.4",
   "manifest_version": 2,
   "description": "Simple interface for blocking content via the webRequest API.",
   "browser_action": {
