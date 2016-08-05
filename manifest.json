@@ -1,6 +1,6 @@
 {
   "name": "SimpleBlock",
-  "version": "0.3",
+  "version": "0.4",
   "manifest_version": 2,
   "description": "Simple interface for blocking content via the webRequest API.",
   "browser_action": {
@@ -18,11 +18,6 @@
      "16": "enabled.png",
      "48": "enabled_48.png"
   },
-  "permissions": ["http://*/*", "https://*/*", "webRequest", "webRequestBlocking"],
-  "incognito": "spanning",
-  "applications": {
-    "gecko": {
-      "id": "simpleblock@slingamn.github.com"
-    }
-  }
+  "permissions": ["http://*/*", "https://*/*", "webRequest", "webRequestBlocking", "storage"],
+  "incognito": "spanning"
 }
