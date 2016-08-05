@@ -9,7 +9,7 @@ allFilters = null;
 
 function setFilters(newFilters) {
 	allFilters = newFilters;
-	localStorage["filters"] = JSON.stringify(newFilters);
+	chrome.storage.local.set({"filters": newFilters});
 }
 
 // magic objects that the webRequest API interprets
@@ -100,15 +100,18 @@ function toggleEnabled() {
 
 // Initialization.
 
-if (localStorage["filters"] == undefined) {
-	console.log("Initializing filters to defaults.");
-	setFilters(defaultFilters);
-} else {
-	allFilters = JSON.parse(localStorage["filters"]);
-}
+storedFilters = chrome.storage.local.get("filters",
+	function(result) {
+		if (result["filters"] == undefined) {
+			console.log("Initializing filters to defaults.");
+			setFilters(defaultFilters);
+		} else {
+			setFilters(result["filters"]);
+		}
 
-// toggle blocking on-off via the extension icon in the Omnibar
-chrome.browserAction.onClicked.addListener(toggleEnabled);
-
-// main screen turn on
-enable();
+		// toggle blocking on-off via the extension icon in the Omnibar
+		chrome.browserAction.onClicked.addListener(toggleEnabled);
+		// main screen turn on
+		enable();
+	}
+);

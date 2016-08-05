@@ -18,7 +18,7 @@
      "16": "enabled.png",
      "48": "enabled_48.png"
   },
-  "permissions": ["http://*/*", "https://*/*", "webRequest", "webRequestBlocking"],
+  "permissions": ["http://*/*", "https://*/*", "webRequest", "webRequestBlocking", "storage"],
   "incognito": "spanning",
   "applications": {
     "gecko": {
