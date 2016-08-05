@@ -8,7 +8,7 @@
     "default_icon": "enabled.png"
   },
   "background": {
-    "scripts": ["default_filters.js", "block.js"]
+    "scripts": ["default_filters.js", "block.js", "imagedata.js"]
   },
   "options_ui": {
     "page": "options.html",
