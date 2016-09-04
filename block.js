@@ -6,6 +6,7 @@
  * */
 
 allFilters = null;
+webRTCPrivacy = null;
 
 function setFilters(newFilters) {
 	allFilters = newFilters;
@@ -98,9 +99,18 @@ function toggleEnabled() {
 	}
 }
 
+function setWebRTCPrivacy(flag, store = true) {
+	webRTCPrivacy = flag;
+	var privacySetting = flag ? "default_public_interface_only" :"default";
+	chrome.privacy.network.webRTCIPHandlingPolicy.set({value: privacySetting});
+	if (store) {
+		chrome.storage.local.set({"webrtc_privacy": flag});
+	}
+}
+
 // Initialization.
 
-storedFilters = chrome.storage.local.get("filters",
+chrome.storage.local.get("filters",
 	function(result) {
 		if (result["filters"] == undefined) {
 			console.log("Initializing filters to defaults.");
@@ -114,5 +124,16 @@ storedFilters = chrome.storage.local.get("filters",
 		chrome.browserAction.onClicked.addListener(toggleEnabled);
 		// main screen turn on
 		enable();
+	}
+);
+
+chrome.storage.local.get("webrtc_privacy",
+	function(result) {
+		if (result["webrtc_privacy"] == undefined) {
+			console.log("Initializing WebRTC privacy to default.");
+			setWebRTCPrivacy(false, true);
+		} else {
+			setWebRTCPrivacy(result["webrtc_privacy"], false);
+		}
 	}
 );
