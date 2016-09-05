@@ -17,6 +17,9 @@ function populate() {
 		option.value = allFilters[i];
 		selector.add(option, null);
 	}
+
+	var webRTCBox = document.getElementById("webRTCBox");
+	webRTCBox.checked = chrome.extension.getBackgroundPage().webRTCPrivacy;
 }
 
 // save and activate changes made in the view
@@ -137,6 +140,11 @@ function init() {
 		chrome.extension.getBackgroundPage().disable();
 	})
 	document.getElementById("sortButton").addEventListener('click', sortFilters);
+
+	var webRTCBox = document.getElementById("webRTCBox")
+	webRTCBox.addEventListener('click', function() {
+		chrome.extension.getBackgroundPage().setWebRTCPrivacy(webRTCBox.checked);
+	});
 }
 
 document.addEventListener('DOMContentLoaded', init);
