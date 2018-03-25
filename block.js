@@ -36,7 +36,7 @@ function blockObject(details) {
 listenerCallbacks = [
 	[["image"], blockImage],
 	[["sub_frame"], blockPage],
-	[["main_frame", "object", "script", "xmlhttprequest", "stylesheet", "other"], blockObject]
+	[["main_frame", "object", "script", "xmlhttprequest", "stylesheet", "font", "media", "ping", "csp_report", "other"], blockObject]
 ]
 
 // global on/off state
@@ -61,6 +61,27 @@ function enable(icon = true) {
 				["blocking"]
 			);
 		}
+	}
+
+	// a scheme of "*" does not currently match ws:// or wss://
+	// for current status, see:
+	// https://bugs.chromium.org/p/chromium/issues/detail?id=129353
+	// https://developer.chrome.com/extensions/match_patterns
+	var wsFilters = [];
+	var prefix = "*://"
+	allFilters.forEach(function(filter) {
+		if (filter.startsWith(prefix)) {
+			var suffix = filter.slice(prefix.length)
+			wsFilters.push("ws://" + suffix)
+			wsFilters.push("wss://" + suffix)
+		}
+	});
+	if (wsFilters.length > 0) {
+		chrome.webRequest.onBeforeRequest.addListener(
+			blockObject,
+			{urls: wsFilters, types: ["websocket"]},
+			["blocking"]
+		);
 	}
 
 	blockingEnabled = true;
